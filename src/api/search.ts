@@ -12,20 +12,33 @@ interface SearchResponse {
   }[];
 }
 
-export const search = async (term: string) => {
-  const res = await fetch(
-    `https://nominatim.openstreetmap.org/search?q=${term}&format=geojson&addressdetails=1&layer=address&limit=5`
-  );
-  const data: SearchResponse = await res.json();
-
-  const places: Place[] = data.features.map((feature) => {
-    return {
-      id: feature.properties.place_id,
-      name: feature.properties.display_name,
-      longitude: feature.geometry.coordinates[0],
-      latitude: feature.geometry.coordinates[1],
-    };
+export const search = async (term: string): Promise<Place[]> => {
+  const params = new URLSearchParams({
+    q: term.trim(),
+    format: "geojson",
+    addressdetails: "1",
+    layer: "address",
+    limit: "5",
   });
 
-  return places;
+  const response = await fetch(
+    `https://nominatim.openstreetmap.org/search?${params.toString()}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Location search request failed.");
+  }
+
+  const data: SearchResponse = await response.json();
+
+  if (!Array.isArray(data.features)) {
+    throw new Error("Unexpected location search response.");
+  }
+
+  return data.features.map((feature) => ({
+    id: feature.properties.place_id,
+    name: feature.properties.display_name,
+    longitude: feature.geometry.coordinates[0],
+    latitude: feature.geometry.coordinates[1],
+  }));
 };
