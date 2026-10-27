@@ -1,43 +1,49 @@
-# Location Search
+# Location Search — React + TypeScript Map
 
-A React and TypeScript location-search application featuring an interactive map.
+An interactive location finder built with **React, TypeScript, Leaflet, and OpenStreetMap**. Search for a city or address, choose a result, and explore it directly on the map.
 
-**[Live Demo](https://location-search-seven.vercel.app/)** · **[Source Code](https://github.com/Ned-Magician/location-search)**
-
-## Tech Stack
-
-- React 19
-- TypeScript
-- Vite
-- Tailwind CSS 4
-- Leaflet and React Leaflet
-- OpenStreetMap tiles and Nominatim location search
+**[Try the live map](https://location-search-seven.vercel.app/)** · **[Developer's GitHub profile](https://github.com/Ned-Magician)**
 
 ## Features
 
-- Search for places by text query
-- Retrieve and display up to five Nominatim results
-- Select a result to move the map to its coordinates
-- Display a map marker for the selected place
-- Use typed location data and separated search/map components
-- Show loading and error feedback when searching
-- Use a stacked search/map view on mobile and side-by-side layout on desktop
+- Location search through the **Nominatim geocoding API** (up to five results)
+- Typed API response mapping and **URL-encoded** search queries
+- Loading feedback and error handling for failed searches
+- Interactive **React Leaflet** map and marker for a selected location
+- Responsive layout: search above map on phones, side-by-side on wider screens
 
-## How It Works
+## Tech stack
 
-1. A search form submits a query to the Nominatim endpoint.
-2. The response is mapped into typed place objects.
-3. Selecting a place updates React state.
-4. React Leaflet flies to that location and displays a marker.
+**React 19 · TypeScript · Vite · Tailwind CSS 4 · Leaflet / React Leaflet · REST / JSON**
 
-## Run Locally
+## How it works
+
+1. Submit a city or address in the search form.
+2. The app requests matching places from the Nominatim API.
+3. A result is converted into a typed place object.
+4. Selecting **Go** updates React state; the map flies to the selected coordinates and displays a marker.
+
+## Project structure
+
+```text
+src/
+  api/
+    Place.ts
+    search.ts
+  components/
+    LocationSearch.tsx
+    Map.tsx
+  App.tsx
+```
+
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Available Checks
+## Available checks
 
 ```bash
 npm run lint
@@ -46,4 +52,6 @@ npm run build
 
 ## Notes
 
-This project demonstrates a location-search interface, **not** page routing or navigation between application routes. The public Nominatim service has a [usage policy](https://operations.osmfoundation.org/policies/nominatim/) that should be respected.
+This is a frontend map/search prototype, not a turn-by-turn navigation service or full geocoding platform. It uses the public [OpenStreetMap tile service](https://operations.osmfoundation.org/policies/tiles/) and [Nominatim API](https://operations.osmfoundation.org/policies/nominatim/); requests are subject to those services' usage policies.
+
+[**More selected work**](https://github.com/Ned-Magician)
