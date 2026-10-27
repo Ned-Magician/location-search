@@ -7,14 +7,15 @@ function App() {
   const [place, setPlace] = useState<Place | null>(null);
 
   return (
-    <div className="h-screen w-screen grid grid-cols-12">
-      <div className="col-span-3 p-2">
-        <LocationSearch onPlaceClick={(p) => setPlace(p)} />
-      </div>
-      <div className="col-span-9">
+    <main className="flex min-h-screen flex-col md:h-screen md:flex-row">
+      <aside className="w-full border-b border-gray-200 bg-white p-4 md:h-full md:w-80 md:shrink-0 md:overflow-y-auto md:border-b-0 md:border-r">
+        <h1 className="mb-4 text-xl font-bold">Location Search</h1>
+        <LocationSearch onPlaceClick={setPlace} />
+      </aside>
+      <div className="h-[60vh] min-h-[320px] w-full flex-1 md:h-full md:min-h-0">
         <Map place={place} />
       </div>
-    </div>
+    </main>
   );
 }
 
