@@ -20,6 +20,8 @@ A React and TypeScript location-search application featuring an interactive map.
 - Select a result to move the map to its coordinates
 - Display a map marker for the selected place
 - Use typed location data and separated search/map components
+- Show loading and error feedback when searching
+- Use a stacked search/map view on mobile and side-by-side layout on desktop
 
 ## How It Works
 
